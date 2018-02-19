@@ -3,6 +3,7 @@
   "compilerOptions": {
   "lib": [
     "es2016",
+    "esnext.asynciterable",
     "dom"
   ],
     "outDir": "../out-tsc/app",

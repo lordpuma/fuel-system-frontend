@@ -1,0 +1,42 @@
+<div class="main-container">
+  <!--<div class="alert alert-app-level">-->
+    <!--...-->
+  <!--</div>-->
+
+  <header class="header-6">
+    <div class="branding">
+      <a routerLink="/protected" class="nav-link">
+        <!--<clr-icon shape="vm-bug"></clr-icon>-->
+        <span class="title">Infosystém</span>
+      </a>
+    </div>
+    <div class="header-nav">
+      <a routerLink="/protected/fuel" class="nav-link" routerLinkActive="/protected/fuel"><span class="nav-text">Benzín</span></a>
+      <!--<a href="..." class="nav-link"><span class="nav-text">Interactive Analytics</span></a>-->
+    </div>
+    <div class="header-actions">
+      <clr-dropdown>
+        <button class="nav-icon" clrDropdownTrigger>
+          <clr-icon shape="user"></clr-icon>
+          <clr-icon shape="caret down"></clr-icon>
+        </button>
+        <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
+          <a routerLink="/protected/profile" clrDropdownItem>Profil</a>
+          <a (click)="logout()" clrDropdownItem>Odhlásit</a>
+        </clr-dropdown-menu>
+      </clr-dropdown>
+    </div>
+  </header>
+
+  <!--<nav class="subnav">-->
+    <!--...-->
+  <!--</nav>-->
+  <div class="content-container">
+    <div class="content-area">
+      <router-outlet></router-outlet>
+    </div>
+    <!--<nav class="sidenav">-->
+      <!--...-->
+    <!--</nav>-->
+  </div>
+</div>

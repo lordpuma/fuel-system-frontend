@@ -1,0 +1,20 @@
+<table class="table table-gas-purchases">
+  <thead>
+  <tr>
+    <th class="left date">Datum</th>
+    <th class="number price">Cena</th>
+    <th class="number liters">Litry</th>
+    <th class="number price-per-liter">Cena za litr</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let gasPurchase of gasPurchases">
+    <td class="left">{{gasPurchase.date | date:'longDate':'GMT':'cs'}}</td>
+    <td class="number">{{gasPurchase.price | number:'0.2-2':'cs'}} Kč</td>
+    <td class="number">{{gasPurchase.liters | number:'0.0':'cs'}} l</td>
+    <td class="number">{{gasPurchase.price / gasPurchase.liters | number:'0.2-2':'cs'}} Kč/l</td>
+  </tr>
+  </tbody>
+</table>
+
+<button class="btn btn-primary" (click)="navigateToNew()">Nový</button>

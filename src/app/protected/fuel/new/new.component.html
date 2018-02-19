@@ -1,0 +1,14 @@
+<form [formGroup]="newFuelForm" (submit)="save()">
+  <section class="form-block">
+    <label>Nový nákup</label>
+    <div class="form-group">
+      <label for="aForm_1">Cena</label>
+      <input type="number" id="aForm_1" placeholder="30,-" size="35" formControlName="price">
+    </div>
+    <div class="form-group">
+      <label for="aForm_1">Litry</label>
+      <input type="number" id="aForm_2" placeholder="1" size="35" formControlName="liters">
+    </div>
+    <button type="submit" class="btn btn-primary">Uložit</button>
+  </section>
+</form>
