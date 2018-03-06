@@ -6,14 +6,16 @@ import { LayoutComponent } from './layout/layout.component';
 import { RouterModule } from '@angular/router';
 import { ClarityModule } from '@clr/angular';
 import { FuelModule } from './fuel/fuel.module';
+import { ProtectedRoutingModule } from './protected-routing.module';
 
 @NgModule({
   imports: [
     CommonModule,
     ProfileModule,
-    FuelModule,
+    // FuelModule,
     RouterModule,
-    ClarityModule
+    ClarityModule,
+    ProtectedRoutingModule
   ],
   declarations: [LayoutComponent],
   providers: [AuthModule]

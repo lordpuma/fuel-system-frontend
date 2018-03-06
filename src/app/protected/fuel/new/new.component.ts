@@ -9,7 +9,10 @@ const newFuelMutation = gql`
   mutation newFuelMutation($price: Int!, $liters: Int!) {
     gasPurchase{
       new (liters: $liters, price: $price) {
+        id
         liters
+        price
+        date
       }
     }
   }
@@ -56,11 +59,11 @@ export class NewComponent implements OnInit {
             }
           }
         },
-        update: (proxy, { data: { submitComment } }) => {
+        update: (proxy, { data: { gasPurchase } }) => {
           // Read the data from our cache for this query.
           const data = <{gasPurchases: Array<any>}> proxy.readQuery({ query: gasPurchasesQuery });
           // Add our comment from the mutation to the end.
-          data.gasPurchases.push(submitComment);
+          data.gasPurchases.push(gasPurchase.new);
           // Write our data back to the cache.
           proxy.writeQuery({ query: gasPurchasesQuery, data });
         },

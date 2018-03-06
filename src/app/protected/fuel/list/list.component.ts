@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs/Subscription';
 import gql from 'graphql-tag';
 import { Router } from '@angular/router';
 
-export const gasPurchasesQuery = gql`query {
+export const gasPurchasesQuery = gql`query gasPurchasesList{
   gasPurchases {
     id
     liters
