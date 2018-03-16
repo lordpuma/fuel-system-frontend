@@ -64,7 +64,6 @@ export class NewComponent implements OnInit {
           const data = <{gasPurchases: Array<any>}> proxy.readQuery({ query: gasPurchasesQuery });
           // Add our comment from the mutation to the end.
           data.gasPurchases.push(gasPurchase.new);
-          // Write our data back to the cache.
           proxy.writeQuery({ query: gasPurchasesQuery, data });
         },
       }).toPromise().then(res => {
