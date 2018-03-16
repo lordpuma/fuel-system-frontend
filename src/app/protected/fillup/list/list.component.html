@@ -10,7 +10,7 @@
   <tbody>
   <tr *ngFor="let gasFillup of gasFillups">
     <td class="left">{{gasFillup.date | date:'longDate':'GMT':'cs'}}</td>
-    <td class="number">{{gasFillup.kart | number:'0.0':'cs'}}</td>
+    <td class="number">{{gasFillup.kart.number}}</td>
     <td class="number">{{gasFillup.liters | number:'0.0':'cs'}} l</td>
   </tr>
   </tbody>

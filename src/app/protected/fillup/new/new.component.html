@@ -2,12 +2,14 @@
   <section class="form-block">
     <label>Nové tankování</label>
     <div class="form-group">
-      <label for="aForm_1">Motokára</label>
-      <input type="number" id="aForm_1" placeholder="33" size="35" formControlName="kart">
+      <label for="kart">Motokára</label>
+      <select id="kart" class="form-control" formControlName="kart">
+        <option *ngFor="let kart of karts" [value]="kart.id">{{kart.number}}</option>
+      </select>
     </div>
     <div class="form-group">
-      <label for="aForm_1">Litry</label>
-      <input type="number" id="aForm_2" placeholder="0 l" size="35" formControlName="liters">
+      <label for="liters">Litry</label>
+      <input type="number" id="liters" placeholder="0 l" size="35" formControlName="liters">
     </div>
     <button type="submit" class="btn btn-primary">Uložit</button>
   </section>

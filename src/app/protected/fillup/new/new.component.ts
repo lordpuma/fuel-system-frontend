@@ -2,21 +2,31 @@ import { Component, OnInit } from '@angular/core';
 import gql from 'graphql-tag';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Apollo } from 'apollo-angular';
+import { Apollo, QueryRef } from 'apollo-angular';
 import { gasFillupsQuery } from '../list/list.component';
+import { Subscription } from 'rxjs/Subscription';
 
 const newFillupMutation = gql`
-  mutation newFillupMutation($kart: Int!, $liters: Int!) {
+  mutation newFillupMutation($kartId: Int!, $liters: Int!) {
     gasFillup{
-      new (liters: $liters, kart: $kart) {
+      new (liters: $liters, kartId: $kartId) {
         id
         liters
-        kart
+        kart {
+          id
+        }
         date
       }
     }
   }
 `;
+
+const kartsQuery = gql`query karts{
+  karts {
+    id
+    number
+  }
+}`;
 
 @Component({
   selector: 'app-new',
@@ -25,6 +35,9 @@ const newFillupMutation = gql`
 })
 export class NewComponent implements OnInit {
   newFillupForm: FormGroup;
+  karts: Array<any>;
+  query: QueryRef<any>;
+  subscription: Subscription;
 
   constructor(private fb: FormBuilder,
               private apollo: Apollo,
@@ -36,6 +49,12 @@ export class NewComponent implements OnInit {
       kart: '',
       liters: '',
     });
+    this.query = this.apollo.watchQuery({
+        query: kartsQuery,
+    });
+    this.subscription = this.query.valueChanges.subscribe(res => {
+        this.karts = res.data.karts;
+    });
   }
 
   save() {
@@ -43,7 +62,7 @@ export class NewComponent implements OnInit {
       this.apollo.mutate({
         mutation: newFillupMutation,
         variables: {
-          kart: this.newFillupForm.value['kart'],
+          kartId: this.newFillupForm.value['kart'],
           liters: this.newFillupForm.value['liters'],
         },
         optimisticResponse: {
@@ -54,7 +73,11 @@ export class NewComponent implements OnInit {
               __typename: 'GasFillup',
               id: Math.random(),
               liters: this.newFillupForm.value['liters'],
-              kart: this.newFillupForm.value['kart'],
+              kart: {
+                __typename: 'Kart',
+                id: Math.random(),
+                number: this.newFillupForm.value['kart'],
+              },
               date: new Date(),
             }
           }
