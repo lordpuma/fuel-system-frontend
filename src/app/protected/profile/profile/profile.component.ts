@@ -1,8 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Apollo, QueryRef } from 'apollo-angular';
 import gql from 'graphql-tag';
-import { Observable } from 'rxjs/Observable';
-import { ApolloQueryResult } from 'apollo-client';
 import { Subscription } from 'rxjs/Subscription';
 
 const userQuery = gql`query {

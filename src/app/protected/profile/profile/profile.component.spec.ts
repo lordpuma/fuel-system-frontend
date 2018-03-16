@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProfileComponent } from './profile.component';
-import { Apollo } from 'apollo-angular';
+import { Apollo, ApolloModule } from 'apollo-angular';
 
 describe('ProfileComponent', () => {
   let component: ProfileComponent;
@@ -9,8 +9,9 @@ describe('ProfileComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [ApolloModule],
       declarations: [ ProfileComponent ],
-      providers: [Apollo]
+      // providers: [ApolloModule]
     })
     .compileComponents();
   }));

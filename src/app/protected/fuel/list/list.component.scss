@@ -7,7 +7,7 @@ th.date {
 }
 
 th.price {
-  width: 9px;
+  width: 150px;
 }
 
 th.liters {
@@ -16,4 +16,11 @@ th.liters {
 
 th.price-per-liter {
   width: 90px;
+}
+
+.buttons-row {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  padding: 1.5em;
 }

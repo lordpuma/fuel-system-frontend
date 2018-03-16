@@ -13,6 +13,8 @@ const loginMutation = gql`
     }
 }`;
 
+//TODO: Počet lístků, zapsat motohodiny, a pokladnička
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',

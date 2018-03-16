@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  backend_uri: 'http://localhost:3000/graphql'
+  backend_uri: '/graphql'
 };
