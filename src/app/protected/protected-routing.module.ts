@@ -16,6 +16,10 @@ const routes: Routes = [
       {
         path: 'fuel',
         loadChildren: './fuel/fuel.module#FuelModule',
+      },
+      {
+        path: 'kart',
+        loadChildren: './kart/kart.module#KartModule',
       }
     ]
   },

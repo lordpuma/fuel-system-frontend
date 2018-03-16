@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import gql from 'graphql-tag';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -23,7 +23,7 @@ const newFillupMutation = gql`
   templateUrl: './new.component.html',
   styleUrls: ['./new.component.scss']
 })
-export class NewComponent implements OnInit {
+export class NewComponent implements OnInit, OnDestroy {
   newFillupForm: FormGroup;
 
   constructor(private fb: FormBuilder,
@@ -68,6 +68,10 @@ export class NewComponent implements OnInit {
         this.router.navigate(['/protected/fillup']);
       }).catch(err => console.log(err));
     }
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 }

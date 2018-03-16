@@ -32,7 +32,7 @@ export class NewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.newFuelForm = this.fb.group({
+    this.newKartForm = this.fb.group({
       price: '',
       liters: '',
     });
