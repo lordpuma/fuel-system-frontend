@@ -1,0 +1,17 @@
+<h1>Přehled motokár</h1>
+<table class="table table-gas-purchases">
+  <thead>
+  <tr>
+    <th class="left date">Motokáara</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let kart of karts">
+    <td class="left">{{kart.number}}</td>
+  </tr>
+  </tbody>
+</table>
+
+<div class="buttons-row">
+  <button class="btn btn-primary button-new" (click)="navigateToNew()">Nový</button>
+</div>
