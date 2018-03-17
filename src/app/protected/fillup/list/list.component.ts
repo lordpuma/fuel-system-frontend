@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 
 
 export const gasFillupsQuery = gql`query {
-  gasFillup {
+  gasFillups {
     id
     liters
     date
@@ -36,7 +36,7 @@ export class ListComponent implements OnInit, OnDestroy {
       query: gasFillupsQuery,
     });
     this.subscription = this.query.valueChanges.subscribe(res => {
-      this.gasFillups = res.data.gasFillup;
+      this.gasFillups = res.data.gasFillups;
     });
   }
 
