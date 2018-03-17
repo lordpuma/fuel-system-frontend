@@ -14,6 +14,7 @@ const newFillupMutation = gql`
         liters
         kart {
           id
+          number
         }
         date
       }
