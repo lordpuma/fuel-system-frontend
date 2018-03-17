@@ -11,6 +11,7 @@ export const gasFillupsQuery = gql`query {
     liters
     date
     kart {
+      id
       number
     }
   }

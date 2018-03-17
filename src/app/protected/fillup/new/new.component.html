@@ -3,9 +3,11 @@
     <label>Nové tankování</label>
     <div class="form-group">
       <label for="kart">Motokára</label>
-      <select id="kart" class="form-control" formControlName="kart">
-        <option *ngFor="let kart of karts" [value]="kart.id">{{kart.number}}</option>
-      </select>
+      <div class="select">
+        <select id="kart" class="form-control" formControlName="kart">
+          <option *ngFor="let kart of karts" [value]="kart.id">{{kart.number}}</option>
+        </select>
+      </div>
     </div>
     <div class="form-group">
       <label for="liters">Litry</label>
