@@ -1,0 +1,21 @@
+<form [formGroup]="insertForm" (submit)="save()">
+  <section class="form-block">
+    <label>Motohodiny</label>
+    <div formArrayName="items"
+         *ngFor="let item of insertForm.get('items').controls; let i = index;">
+      <div [formGroupName]="i">
+        <div class="form-group row">
+          <div class="col-sm-5">
+            <label for="hours">Motokára {{kartNumber(item.controls.kartId.value)}}</label>
+          </div>
+          <div class="col-sm-3">
+            <input formControlName="hours" id="hours" placeholder="Hodiny" type="number">
+          </div>
+          <input formControlName="kartId" type="hidden">
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Uložit</button>
+  </section>
+</form>
