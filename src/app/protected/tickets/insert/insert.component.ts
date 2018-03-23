@@ -5,20 +5,17 @@ import { Subscription } from 'rxjs/Subscription';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
-const kartsQuery = gql`query karts($date: String!){
-  karts {
+const premisesQuery = gql`query premisesQuery{
+  premises {
     id
-    number
-    hours(date: $date)
+    name
   }
 }`;
 
-const motoHoursMutation = gql`mutation saveMotohours($kartHours: [KartHoursInput]) {
-  kartHours {
-    new(kartHours: $kartHours) {
+const ticketsMutation = gql`mutation saveTickets($premiseId: Int!, $count: Int!) {
+  tickets {
+    new(premiseId: $premiseId, count: $count) {
       id
-      hours
-      date
     }
   }
 }`;
@@ -29,7 +26,7 @@ const motoHoursMutation = gql`mutation saveMotohours($kartHours: [KartHoursInput
   styleUrls: ['./insert.component.scss']
 })
 export class InsertComponent implements OnInit, OnDestroy {
-  karts: Array<any>;
+  premises: Array<any>;
   query: QueryRef<any>;
   subscription: Subscription;
   insertForm: FormGroup;
@@ -38,20 +35,14 @@ export class InsertComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.insertForm = this.fb.group({
-      items: this.fb.array([])
+      premiseId: '',
+      count: '',
     });
     this.query = this.apollo.watchQuery({
-      query: kartsQuery,
-      variables: {
-        date: new Date(),
-      }
+      query: premisesQuery,
     });
     this.subscription = this.query.valueChanges.subscribe(res => {
-      this.premises = res.data.karts;
-      this.karts.forEach(kart => {
-        const items = this.insertForm.get('items') as FormArray;
-          items.push(this.createItem(kart));
-      });
+      this.premises = res.data.premises;
     });
   }
 
@@ -59,21 +50,10 @@ export class InsertComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  createItem(kart): FormGroup {
-    return this.fb.group({
-      hours: kart.hours,
-      kartId: kart.id
-    });
-  }
-
-  kartNumber(kartId: number): number {
-    return this.karts.find(kart => kart.id === kartId).number;
-  }
-
   save(): void {
     this.apollo.mutate({
-      mutation: motoHoursMutation,
-      variables: {kartHours: this.insertForm.controls.items.value.filter(value => value.hours !== null)},
+      mutation: ticketsMutation,
+      variables: this.insertForm.value,
     }).subscribe(res => {
       this.router.navigate(['/protected/fuel']); // TODO: Correct redirect
     });

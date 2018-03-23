@@ -24,6 +24,10 @@ const routes: Routes = [
       {
         path: 'kart-hours',
         loadChildren: './kart-hours/kart-hours.module#KartHoursModule',
+      },
+      {
+        path: 'tickets',
+        loadChildren: './tickets/tickets.module#TicketsModule',
       }
     ]
   },
