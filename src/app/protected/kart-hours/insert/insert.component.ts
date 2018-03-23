@@ -47,7 +47,7 @@ export class InsertComponent implements OnInit, OnDestroy {
       }
     });
     this.subscription = this.query.valueChanges.subscribe(res => {
-      this.premises = res.data.karts;
+      this.karts = res.data.karts;
       this.karts.forEach(kart => {
         const items = this.insertForm.get('items') as FormArray;
           items.push(this.createItem(kart));
