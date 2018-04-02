@@ -88,10 +88,10 @@ export class NewComponent implements OnInit, OnDestroy {
             },
           },
           update: (proxy, { data: { gasFillup } }) => {
-            const data = <{ gasFillup: Array<any> }>proxy.readQuery({
+            const data = <{ gasFillups: Array<any> }>proxy.readQuery({
               query: gasFillupsQuery,
             });
-            data.gasFillup.push(gasFillup.new);
+            data.gasFillups.push(gasFillup.new);
             proxy.writeQuery({ query: gasFillupsQuery, data });
           },
         })
