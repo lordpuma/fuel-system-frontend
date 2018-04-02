@@ -6,11 +6,14 @@ import { Apollo } from 'apollo-angular';
 describe('LoginServiceService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [LoginServiceService, Apollo]
+      providers: [LoginServiceService, Apollo],
     });
   });
 
-  it('should be created', inject([LoginServiceService], (service: LoginServiceService) => {
-    expect(service).toBeTruthy();
-  }));
+  it(
+    'should be created',
+    inject([LoginServiceService], (service: LoginServiceService) => {
+      expect(service).toBeTruthy();
+    }),
+  );
 });

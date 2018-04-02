@@ -11,8 +11,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    FillupRoutingModule
+    FillupRoutingModule,
   ],
-  declarations: [ListComponent, NewComponent]
+  declarations: [ListComponent, NewComponent],
 })
-export class FillupModule { }
+export class FillupModule {}

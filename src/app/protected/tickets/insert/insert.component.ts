@@ -5,25 +5,29 @@ import { Subscription } from 'rxjs/Subscription';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
-const premisesQuery = gql`query premisesQuery{
-  premises {
-    id
-    name
-  }
-}`;
-
-const ticketsMutation = gql`mutation saveTickets($premiseId: Int!, $count: Int!) {
-  tickets {
-    new(premiseId: $premiseId, count: $count) {
+const premisesQuery = gql`
+  query premisesQuery {
+    premises {
       id
+      name
     }
   }
-}`;
+`;
+
+const ticketsMutation = gql`
+  mutation saveTickets($premiseId: Int!, $count: Int!) {
+    tickets {
+      new(premiseId: $premiseId, count: $count) {
+        id
+      }
+    }
+  }
+`;
 
 @Component({
   selector: 'app-insert',
   templateUrl: './insert.component.html',
-  styleUrls: ['./insert.component.scss']
+  styleUrls: ['./insert.component.scss'],
 })
 export class InsertComponent implements OnInit, OnDestroy {
   premises: Array<any>;
@@ -31,7 +35,11 @@ export class InsertComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   insertForm: FormGroup;
 
-  constructor(private apollo: Apollo, private fb: FormBuilder, private router: Router) { }
+  constructor(
+    private apollo: Apollo,
+    private fb: FormBuilder,
+    private router: Router,
+  ) {}
 
   ngOnInit() {
     this.insertForm = this.fb.group({
@@ -52,11 +60,13 @@ export class InsertComponent implements OnInit, OnDestroy {
   }
 
   save(): void {
-    this.apollo.mutate({
-      mutation: ticketsMutation,
-      variables: this.insertForm.value,
-    }).subscribe(res => {
-      this.router.navigate(['/protected/fuel']); // TODO: Correct redirect
-    });
+    this.apollo
+      .mutate({
+        mutation: ticketsMutation,
+        variables: this.insertForm.value,
+      })
+      .subscribe(res => {
+        this.router.navigate(['/protected/fuel']); // TODO: Correct redirect
+      });
   }
 }

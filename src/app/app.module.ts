@@ -6,10 +6,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ClarityModule } from '@clr/angular';
 import { AuthModule } from './auth/auth.module';
-import {HttpClientModule, HttpHeaders} from '@angular/common/http';
-import {Apollo, ApolloModule} from 'apollo-angular';
+import { HttpClientModule, HttpHeaders } from '@angular/common/http';
+import { Apollo, ApolloModule } from 'apollo-angular';
 import { HttpLink, HttpLinkModule } from 'apollo-angular-link-http';
-import {ApolloLink, concat} from 'apollo-link';
+import { ApolloLink, concat } from 'apollo-link';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { onError } from 'apollo-link-error';
 import { ProtectedModule } from './protected/protected.module';
@@ -21,9 +21,7 @@ import { environment } from '../environments/environment';
 registerLocaleData(localeCs, 'cs');
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     FormsModule,
@@ -33,23 +31,23 @@ registerLocaleData(localeCs, 'cs');
     ClarityModule,
     AuthModule,
     ProtectedModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {
-  constructor(apollo: Apollo,
-    httpLink: HttpLink
-  ) {
-      const http = httpLink.create({uri: environment.backend_uri});
-
+  constructor(apollo: Apollo, httpLink: HttpLink) {
+    const http = httpLink.create({ uri: environment.backend_uri });
 
     const authMiddleware = new ApolloLink((operation, forward) => {
       // add the authorization to the headers
       if (!!localStorage.getItem('token')) {
         operation.setContext({
-          headers: new HttpHeaders().set('Token', localStorage.getItem('token'))
+          headers: new HttpHeaders().set(
+            'Token',
+            localStorage.getItem('token'),
+          ),
         });
       }
       return forward(operation);
@@ -57,15 +55,15 @@ export class AppModule {
 
     const logoutLink = onError(({ networkError }) => {
       // if (networkError.statusCode === 401) {
-        // TODO: apply logout logic here
+      // TODO: apply logout logic here
       // }
     });
 
-      apollo.create({
-        link: concat(authMiddleware, http),
-        // link: http,
-        cache: new InMemoryCache()
-        // other options like cache
-      });
-    }
+    apollo.create({
+      link: concat(authMiddleware, http),
+      // link: http,
+      cache: new InMemoryCache(),
+      // other options like cache
+    });
+  }
 }

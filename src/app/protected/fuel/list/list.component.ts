@@ -4,28 +4,28 @@ import { Subscription } from 'rxjs/Subscription';
 import gql from 'graphql-tag';
 import { Router } from '@angular/router';
 
-export const gasPurchasesQuery = gql`query gasPurchasesList{
-  gasPurchases {
-    id
-    liters
-    date
-    price
+export const gasPurchasesQuery = gql`
+  query gasPurchasesList {
+    gasPurchases {
+      id
+      liters
+      date
+      price
+    }
   }
-}`;
+`;
 
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss']
+  styleUrls: ['./list.component.scss'],
 })
 export class ListComponent implements OnInit, OnDestroy {
   gasPurchases: Array<any>;
   query: QueryRef<any>;
   subscription: Subscription;
 
-  constructor(private apollo: Apollo,
-              private router: Router,
-  ) { }
+  constructor(private apollo: Apollo, private router: Router) {}
 
   ngOnInit() {
     this.query = this.apollo.watchQuery({

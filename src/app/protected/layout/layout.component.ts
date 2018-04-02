@@ -5,23 +5,29 @@ import { Apollo, QueryRef } from 'apollo-angular';
 import { Subscription } from 'rxjs/Subscription';
 import gql from 'graphql-tag';
 
-const userQuery = gql`query {
-  userByMe {
-    username
+const userQuery = gql`
+  query {
+    userByMe {
+      username
+    }
   }
-}`;
+`;
 
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
-  styleUrls: ['./layout.component.scss']
+  styleUrls: ['./layout.component.scss'],
 })
 export class LayoutComponent implements OnInit, OnDestroy {
   user;
   query: QueryRef<any>;
   subscription: Subscription;
 
-  constructor(private apollo: Apollo, private router: Router, private authService: LoginServiceService) { }
+  constructor(
+    private apollo: Apollo,
+    private router: Router,
+    private authService: LoginServiceService,
+  ) {}
 
   ngOnInit() {
     this.query = this.apollo.watchQuery({

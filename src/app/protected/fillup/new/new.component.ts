@@ -8,8 +8,8 @@ import { Subscription } from 'rxjs/Subscription';
 
 const newFillupMutation = gql`
   mutation newFillupMutation($kartId: Int!, $liters: Int!) {
-    gasFillup{
-      new (liters: $liters, kartId: $kartId) {
+    gasFillup {
+      new(liters: $liters, kartId: $kartId) {
         id
         liters
         kart {
@@ -22,17 +22,19 @@ const newFillupMutation = gql`
   }
 `;
 
-const kartsQuery = gql`query karts{
-  karts {
-    id
-    number
+const kartsQuery = gql`
+  query karts {
+    karts {
+      id
+      number
+    }
   }
-}`;
+`;
 
 @Component({
   selector: 'app-new',
   templateUrl: './new.component.html',
-  styleUrls: ['./new.component.scss']
+  styleUrls: ['./new.component.scss'],
 })
 export class NewComponent implements OnInit, OnDestroy {
   newFillupForm: FormGroup;
@@ -40,10 +42,11 @@ export class NewComponent implements OnInit, OnDestroy {
   query: QueryRef<any>;
   subscription: Subscription;
 
-  constructor(private fb: FormBuilder,
-              private apollo: Apollo,
-              private router: Router,
-  ) { }
+  constructor(
+    private fb: FormBuilder,
+    private apollo: Apollo,
+    private router: Router,
+  ) {}
 
   ngOnInit() {
     this.newFillupForm = this.fb.group({
@@ -51,51 +54,56 @@ export class NewComponent implements OnInit, OnDestroy {
       liters: '',
     });
     this.query = this.apollo.watchQuery({
-        query: kartsQuery,
+      query: kartsQuery,
     });
     this.subscription = this.query.valueChanges.subscribe(res => {
-        this.karts = res.data.karts;
+      this.karts = res.data.karts;
     });
   }
 
   save() {
     if (this.newFillupForm.valid) {
-      this.apollo.mutate({
-        mutation: newFillupMutation,
-        variables: {
-          kartId: this.newFillupForm.value['kart'],
-          liters: this.newFillupForm.value['liters'],
-        },
-        optimisticResponse: {
-          __typename: 'Mutation',
-          gasFillup: {
-            __typename: 'GasFilcdpMutation',
-            new: {
-              __typename: 'GasFillup',
-              id: Math.random(),
-              liters: this.newFillupForm.value['liters'],
-              kart: {
-                __typename: 'Kart',
+      this.apollo
+        .mutate({
+          mutation: newFillupMutation,
+          variables: {
+            kartId: this.newFillupForm.value['kart'],
+            liters: this.newFillupForm.value['liters'],
+          },
+          optimisticResponse: {
+            __typename: 'Mutation',
+            gasFillup: {
+              __typename: 'GasFilcdpMutation',
+              new: {
+                __typename: 'GasFillup',
                 id: Math.random(),
-                number: this.newFillupForm.value['kart'],
+                liters: this.newFillupForm.value['liters'],
+                kart: {
+                  __typename: 'Kart',
+                  id: Math.random(),
+                  number: this.newFillupForm.value['kart'],
+                },
+                date: new Date(),
               },
-              date: new Date(),
-            }
-          }
-        },
-        update: (proxy, { data: { gasFillup } }) => {
-          const data = <{gasFillup: Array<any>}> proxy.readQuery({ query: gasFillupsQuery });
-          data.gasFillup.push(gasFillup.new);
-          proxy.writeQuery({ query: gasFillupsQuery, data });
-        },
-      }).toPromise().then(res => {
-        this.router.navigate(['/protected/fillup']);
-      }).catch(err => console.log(err));
+            },
+          },
+          update: (proxy, { data: { gasFillup } }) => {
+            const data = <{ gasFillup: Array<any> }>proxy.readQuery({
+              query: gasFillupsQuery,
+            });
+            data.gasFillup.push(gasFillup.new);
+            proxy.writeQuery({ query: gasFillupsQuery, data });
+          },
+        })
+        .toPromise()
+        .then(res => {
+          this.router.navigate(['/protected/fillup']);
+        })
+        .catch(err => console.log(err));
     }
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
-
 }

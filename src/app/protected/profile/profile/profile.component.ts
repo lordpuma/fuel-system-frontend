@@ -3,23 +3,25 @@ import { Apollo, QueryRef } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { Subscription } from 'rxjs/Subscription';
 
-const userQuery = gql`query {
-  userByMe {
-    username
+const userQuery = gql`
+  query {
+    userByMe {
+      username
+    }
   }
-}`;
+`;
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit, OnDestroy {
   user;
   query: QueryRef<any>;
   subscription: Subscription;
 
-  constructor(private apollo: Apollo) { }
+  constructor(private apollo: Apollo) {}
 
   ngOnInit() {
     this.query = this.apollo.watchQuery({
@@ -33,5 +35,4 @@ export class ProfileComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
-
 }

@@ -9,14 +9,15 @@ describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule, FormsModule, RouterTestingModule],
-      declarations: [ LoginComponent ],
-      providers: [Apollo]
-    })
-    .compileComponents();
-  }));
+  beforeEach(
+    async(() => {
+      TestBed.configureTestingModule({
+        imports: [ReactiveFormsModule, FormsModule, RouterTestingModule],
+        declarations: [LoginComponent],
+        providers: [Apollo],
+      }).compileComponents();
+    }),
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LoginComponent);

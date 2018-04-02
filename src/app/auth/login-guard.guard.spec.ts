@@ -7,11 +7,14 @@ import { Apollo } from 'apollo-angular';
 describe('LoginGuardGuard', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [LoginGuardGuard, LoginServiceService, Apollo]
+      providers: [LoginGuardGuard, LoginServiceService, Apollo],
     });
   });
 
-  it('should ...', inject([LoginGuardGuard], (guard: LoginGuardGuard) => {
-    expect(guard).toBeTruthy();
-  }));
+  it(
+    'should ...',
+    inject([LoginGuardGuard], (guard: LoginGuardGuard) => {
+      expect(guard).toBeTruthy();
+    }),
+  );
 });

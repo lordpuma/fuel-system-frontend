@@ -4,33 +4,31 @@ import { Subscription } from 'rxjs/Subscription';
 import { Apollo, QueryRef } from 'apollo-angular';
 import { Router } from '@angular/router';
 
-
-export const gasFillupsQuery = gql`query {
-  gasFillups {
-    id
-    liters
-    date
-    kart {
+export const gasFillupsQuery = gql`
+  query {
+    gasFillups {
       id
-      number
+      liters
+      date
+      kart {
+        id
+        number
+      }
     }
   }
-}`;
-
+`;
 
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss']
+  styleUrls: ['./list.component.scss'],
 })
 export class ListComponent implements OnInit, OnDestroy {
   gasFillups: Array<any>;
   query: QueryRef<any>;
   subscription: Subscription;
 
-  constructor(private apollo: Apollo,
-              private router: Router,
-  ) { }
+  constructor(private apollo: Apollo, private router: Router) {}
 
   ngOnInit() {
     this.query = this.apollo.watchQuery({

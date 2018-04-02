@@ -15,9 +15,9 @@ import { ProtectedRoutingModule } from './protected-routing.module';
     // FuelModule,
     RouterModule,
     ClarityModule,
-    ProtectedRoutingModule
+    ProtectedRoutingModule,
   ],
   declarations: [LayoutComponent],
-  providers: [AuthModule]
+  providers: [AuthModule],
 })
-export class ProtectedModule { }
+export class ProtectedModule {}

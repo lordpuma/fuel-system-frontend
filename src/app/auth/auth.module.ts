@@ -7,13 +7,8 @@ import { LoginServiceService } from './login-service.service';
 import { LoginGuardGuard } from './login-guard.guard';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
-  imports: [
-    CommonModule,
-    AuthRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-  ],
+  imports: [CommonModule, AuthRoutingModule, FormsModule, ReactiveFormsModule],
   declarations: [LoginComponent],
-  providers: [LoginServiceService, LoginGuardGuard]
+  providers: [LoginServiceService, LoginGuardGuard],
 })
-export class AuthModule { }
+export class AuthModule {}

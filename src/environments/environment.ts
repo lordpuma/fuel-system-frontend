@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  backend_uri: '/graphql'
+  backend_uri: '/graphql',
 };

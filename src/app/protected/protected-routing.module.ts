@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LayoutComponent  } from './layout/layout.component';
+import { LayoutComponent } from './layout/layout.component';
 import { LoginGuardGuard } from '../auth/login-guard.guard';
 
 const routes: Routes = [
@@ -28,13 +28,13 @@ const routes: Routes = [
       {
         path: 'tickets',
         loadChildren: './tickets/tickets.module#TicketsModule',
-      }
-    ]
+      },
+    ],
   },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class ProtectedRoutingModule { }
+export class ProtectedRoutingModule {}

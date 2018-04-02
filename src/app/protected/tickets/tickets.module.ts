@@ -12,6 +12,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
   ],
-  declarations: [InsertComponent]
+  declarations: [InsertComponent],
 })
-export class TicketsModule { }
+export class TicketsModule {}

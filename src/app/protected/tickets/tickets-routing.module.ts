@@ -9,12 +9,12 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'insert'
-  }
+    redirectTo: 'insert',
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class TicketsRoutingModule { }
+export class TicketsRoutingModule {}

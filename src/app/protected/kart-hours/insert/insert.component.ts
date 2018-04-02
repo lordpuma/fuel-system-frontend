@@ -5,28 +5,32 @@ import { Subscription } from 'rxjs/Subscription';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
-const kartsQuery = gql`query karts($date: String!){
-  karts {
-    id
-    number
-    hours(date: $date)
-  }
-}`;
-
-const motoHoursMutation = gql`mutation saveMotohours($kartHours: [KartHoursInput]) {
-  kartHours {
-    new(kartHours: $kartHours) {
+const kartsQuery = gql`
+  query karts($date: String!) {
+    karts {
       id
-      hours
-      date
+      number
+      hours(date: $date)
     }
   }
-}`;
+`;
+
+const motoHoursMutation = gql`
+  mutation saveMotohours($kartHours: [KartHoursInput]) {
+    kartHours {
+      new(kartHours: $kartHours) {
+        id
+        hours
+        date
+      }
+    }
+  }
+`;
 
 @Component({
   selector: 'app-insert',
   templateUrl: './insert.component.html',
-  styleUrls: ['./insert.component.scss']
+  styleUrls: ['./insert.component.scss'],
 })
 export class InsertComponent implements OnInit, OnDestroy {
   karts: Array<any>;
@@ -34,24 +38,28 @@ export class InsertComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   insertForm: FormGroup;
 
-  constructor(private apollo: Apollo, private fb: FormBuilder, private router: Router) { }
+  constructor(
+    private apollo: Apollo,
+    private fb: FormBuilder,
+    private router: Router,
+  ) {}
 
   ngOnInit() {
     this.insertForm = this.fb.group({
       date: new Date().toISOString().substr(0, 10),
-      items: this.fb.array([])
+      items: this.fb.array([]),
     });
     this.query = this.apollo.watchQuery({
       query: kartsQuery,
       variables: {
         date: new Date(),
-      }
+      },
     });
     this.subscription = this.query.valueChanges.subscribe(res => {
       this.karts = res.data.karts;
       this.karts.forEach(kart => {
         const items = this.insertForm.get('items') as FormArray;
-          items.push(this.createItem(kart));
+        items.push(this.createItem(kart));
       });
     });
   }
@@ -63,7 +71,7 @@ export class InsertComponent implements OnInit, OnDestroy {
   createItem(kart): FormGroup {
     return this.fb.group({
       hours: kart.hours,
-      kartId: kart.id
+      kartId: kart.id,
     });
   }
 
@@ -72,11 +80,17 @@ export class InsertComponent implements OnInit, OnDestroy {
   }
 
   save(): void {
-    this.apollo.mutate({
-      mutation: motoHoursMutation,
-      variables: {kartHours: this.insertForm.controls.items.value.filter(value => value.hours !== null)},
-    }).subscribe(res => {
-      this.router.navigate(['/protected/fuel']); // TODO: Correct redirect
-    });
+    this.apollo
+      .mutate({
+        mutation: motoHoursMutation,
+        variables: {
+          kartHours: this.insertForm.controls.items.value.filter(
+            value => value.hours !== null,
+          ),
+        },
+      })
+      .subscribe(res => {
+        this.router.navigate(['/protected/fuel']); // TODO: Correct redirect
+      });
   }
 }

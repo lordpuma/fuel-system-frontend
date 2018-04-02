@@ -7,12 +7,7 @@ import { NewComponent } from './new/new.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    KartRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-  ],
-  declarations: [ListComponent, NewComponent]
+  imports: [CommonModule, KartRoutingModule, FormsModule, ReactiveFormsModule],
+  declarations: [ListComponent, NewComponent],
 })
-export class KartModule { }
+export class KartModule {}

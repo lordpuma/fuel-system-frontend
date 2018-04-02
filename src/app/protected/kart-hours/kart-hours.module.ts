@@ -10,8 +10,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
-    KartHoursRoutingModule
+    KartHoursRoutingModule,
   ],
-  declarations: [InsertComponent]
+  declarations: [InsertComponent],
 })
-export class KartHoursModule { }
+export class KartHoursModule {}

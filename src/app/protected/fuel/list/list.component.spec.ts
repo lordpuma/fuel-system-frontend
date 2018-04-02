@@ -8,14 +8,15 @@ describe('ListComponent', () => {
   let component: ListComponent;
   let fixture: ComponentFixture<ListComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
-      declarations: [ ListComponent ],
-      providers: [Apollo]
-    })
-    .compileComponents();
-  }));
+  beforeEach(
+    async(() => {
+      TestBed.configureTestingModule({
+        imports: [RouterTestingModule],
+        declarations: [ListComponent],
+        providers: [Apollo],
+      }).compileComponents();
+    }),
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ListComponent);

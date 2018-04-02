@@ -14,12 +14,12 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'list'
-  }
+    redirectTo: 'list',
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class FillupRoutingModule { }
+export class FillupRoutingModule {}

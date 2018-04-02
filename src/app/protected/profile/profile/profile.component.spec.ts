@@ -7,14 +7,15 @@ describe('ProfileComponent', () => {
   let component: ProfileComponent;
   let fixture: ComponentFixture<ProfileComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [ApolloModule],
-      declarations: [ ProfileComponent ],
-      // providers: [ApolloModule]
-    })
-    .compileComponents();
-  }));
+  beforeEach(
+    async(() => {
+      TestBed.configureTestingModule({
+        imports: [ApolloModule],
+        declarations: [ProfileComponent],
+        // providers: [ApolloModule]
+      }).compileComponents();
+    }),
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ProfileComponent);
