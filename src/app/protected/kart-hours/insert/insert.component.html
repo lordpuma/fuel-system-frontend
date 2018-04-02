@@ -1,6 +1,12 @@
 <form [formGroup]="insertForm" (submit)="save()">
   <section class="form-block">
     <label>Motohodiny</label>
+
+    <div class="form-group">
+      <label for="date">Datum</label>
+      <input type="date" id="date" clrDate formControlName="date"/>
+    </div>
+
     <div formArrayName="items"
          *ngFor="let item of insertForm.get('items').controls; let i = index;">
       <div [formGroupName]="i">

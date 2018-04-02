@@ -35,6 +35,7 @@ export class InsertComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.insertForm = this.fb.group({
+      date: new Date().toISOString().substr(0, 10),
       premiseId: '',
       count: '',
     });

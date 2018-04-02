@@ -69,7 +69,7 @@ export class NewComponent implements OnInit, OnDestroy {
         optimisticResponse: {
           __typename: 'Mutation',
           gasFillup: {
-            __typename: 'GasFillupMutation',
+            __typename: 'GasFilcdpMutation',
             new: {
               __typename: 'GasFillup',
               id: Math.random(),
