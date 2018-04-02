@@ -29,6 +29,10 @@ const routes: Routes = [
         path: 'tickets',
         loadChildren: './tickets/tickets.module#TicketsModule',
       },
+      {
+        path: 'electricity',
+        loadChildren: './electricity/electricity.module#ElectricityModule',
+      },
     ],
   },
 ];

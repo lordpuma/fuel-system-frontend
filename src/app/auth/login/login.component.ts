@@ -56,7 +56,6 @@ export class LoginComponent implements OnInit {
         },
         err => {
           this.credentialsError = true;
-          console.log(err);
         },
       );
   }

@@ -1,0 +1,19 @@
+<h1>Přehled stavů elektroměrů</h1>
+<table class="table table-electricities">
+  <thead>
+  <tr>
+    <th class="left date">Datum</th>
+    <th class="number">Elektroměr 1</th>
+    <th class="number">Elektroměr 2</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let electricity of electricities">
+    <td class="left">{{electricity.date | date:'longDate'}}</td>
+    <td class="number">{{electricity.meter1 | number:'0.0':'cs'}}</td>
+    <td class="number">{{electricity.meter2 | number:'0.0':'cs'}}</td>
+  </tr>
+  </tbody>
+</table>
+
+<button class="btn btn-primary" (click)="navigateToNew()">Nový záznam</button>

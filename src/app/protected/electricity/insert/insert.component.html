@@ -1,0 +1,22 @@
+<form [formGroup]="insertForm" (submit)="save()">
+  <section class="form-block">
+    <label>Elektřina</label>
+
+    <div class="form-group">
+      <label for="date">Datum</label>
+      <input type="date" id="date" clrDate formControlName="date"/>
+    </div>
+
+    <div class="form-group">
+      <label for="meter1">Elektroměr 1</label>
+      <input type="number" id="meter1" formControlName="meter1" />
+    </div>
+
+    <div class="form-group">
+      <label for="meter2">Elektroměr 2</label>
+      <input type="number" id="meter2" formControlName="meter2" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Uložit</button>
+  </section>
+</form>
